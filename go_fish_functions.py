@@ -43,8 +43,8 @@ def deal_card(asker_cards, askee_cards, pairs, deck):
             askee_cards.remove(card_1)
             break
         else:
-            asker_cards.append(card)
-            break
+            continue
+    asker_cards.append(card)
 
 # print(pairs(deck))
 # print(deck)
