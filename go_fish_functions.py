@@ -3,7 +3,6 @@ from deck_functions import *
 
 from random import choice
 
-# deck = ['Queen of Hearts', 'Jack of Spades', '2 of Clubs', '2 of Hearts', 'Queen of Diamonds', '5 of Hearts', '2 of Diamonds']
 
 def pairs(deck):
     '''Returns a list of pairs of values.'''
@@ -29,22 +28,26 @@ def ask_value(asker_cards, askee_cards, pairs):
             askee_cards.remove(card_1)
             ask_value(asker_cards, askee_cards, pairs)
         continue
-        
+    card = card
+    return card   
 
-def deal_card(asker_cards, askee_cards, pairs, deck):
-    '''deals top card from the deck.'''
+def deal_card(asker_cards, askee_cards, pairs, deck, player_ask):
+    '''Deals top card from the deck and compares value with player ask or with another value in player hand. 
+        If no matches, card appended to player hand.'''
     card = deal_top_card(deck)
     value = get_value(card)
-    for card_1 in asker_cards:
-        if value == get_value(card_1):
-            pairs.append(card)
-            pairs.append(card_1)
-            asker_cards.remove(card)
-            askee_cards.remove(card_1)
-            break
-        else:
-            continue
-    asker_cards.append(card)
-
-# print(pairs(deck))
-# print(deck)
+    if value == get_value(player_ask):
+        pairs.append(card)
+        pairs.append(player_ask)
+        asker_cards.remove(player_ask)
+        ask_value(asker_cards, askee_cards, pairs)
+    else:
+        for card_1 in asker_cards:
+            if value == get_value(card_1):
+                pairs.append(card)
+                pairs.append(card_1)
+                asker_cards.remove(card_1)
+                break
+            else:
+                continue
+        asker_cards.append(card)
