@@ -21,16 +21,16 @@ print(f'Comp original hand: {comp_cards}')
 player_pairs = pairs(player_cards)
 comp_pairs = pairs(comp_cards)
 
-player_ask = ask_value(player_cards, comp_cards, player_pairs)
-print(player_ask)
-deal_card(player_cards, comp_cards, player_pairs, deck, player_ask)
-comp_ask = ask_value(comp_cards, player_cards, comp_pairs)
-deal_card(comp_cards, player_cards, comp_pairs, deck, player_ask)
-
-print(f'Player cards: {player_cards}')
-print(f'Comp cards: {comp_cards}')
+while len(player_cards) > 0 and len(comp_cards) > 0:
+    player_ask = ask_value(player_cards, comp_cards, player_pairs)
+    deal_card(player_cards, comp_cards, player_pairs, deck)
+    comp_ask = ask_value(comp_cards, player_cards, comp_pairs)
+    deal_card(comp_cards, player_cards, comp_pairs, deck)
 
 print(f'Player pairs: {player_pairs}')
 print(f'Comp pairs: {comp_pairs}')
+
+print(player_cards)
+print(comp_cards)
 
 print(len(deck))
