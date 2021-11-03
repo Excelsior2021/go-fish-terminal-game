@@ -27,13 +27,12 @@ def ask_value(asker_cards, askee_cards, pairs):
                 pairs.append(card_1)
                 asker_cards.remove(card)
                 askee_cards.remove(card_1)
-                if len(asker_cards) > 0:
-                    ask_value(asker_cards, askee_cards, pairs)
+                ask_value(asker_cards, askee_cards, pairs)
             continue 
 
 def deal_card(asker_cards, askee_cards, pairs, deck):
     '''Deals top card from the deck and compares value with player ask or with another value in player hand. 
-        If no matches, card appended to player hand.'''
+        If no matches, card added to player hand.'''
     if len(deck) > 0:
         card = deal_top_card(deck)
         value = get_value(card)
@@ -44,7 +43,7 @@ def deal_card(asker_cards, askee_cards, pairs, deck):
                 pairs.append(player_ask)
                 asker_cards.remove(player_ask)
                 ask_value(asker_cards, askee_cards, pairs)
-            else:
+            elif value != get_value(player_ask):
                 for card_1 in asker_cards:
                     if value == get_value(card_1):
                         pairs.append(card)
@@ -53,4 +52,5 @@ def deal_card(asker_cards, askee_cards, pairs, deck):
                         break
                     else:
                         continue
+            else:
                 asker_cards.append(card)
