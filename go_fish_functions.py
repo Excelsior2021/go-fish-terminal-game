@@ -3,7 +3,6 @@ from deck_functions import *
 
 from random import choice
 
-
 def pairs(hand):
     '''Returns a list of pairs of values.'''
     pairs = []
@@ -53,5 +52,6 @@ def deal_card(asker_hand, askee_hand, asker_pairs, deck):
                     break
 
 def again(asker_hand, askee_hand, asker_pairs):
+    '''Calls ask_value if player is to play again.'''
     if ask_value or deal_card:
         ask_value(asker_hand, askee_hand, asker_pairs)
