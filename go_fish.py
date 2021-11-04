@@ -20,11 +20,15 @@ player2_pairs = pairs(player2_cards)
 while len(deck) > 0 and len(player1_cards) > 0 and len(player2_cards) > 0:
     #player1 turn.
     player1_ask = ask_value(player1_cards, player2_cards, player1_pairs)
-    player1_dealed = deal_card(player1_cards, player1_pairs, deck)
+    again(player1_cards, player2_cards, player1_pairs)
+    player1_dealed = deal_card(player1_cards, player2_cards, player1_pairs, deck)
+    again(player1_cards, player2_cards, player1_pairs)
 
     #player2 turn.
     player2_ask = ask_value(player2_cards, player1_cards, player2_pairs)
-    player2_dealed = deal_card(player2_cards, player2_pairs, deck)
+    again(player2_cards, player1_cards, player2_pairs)
+    player2_dealed = deal_card(player2_cards, player1_cards, player2_pairs, deck)
+    again(player2_cards, player1_cards, player2_pairs)
 
 print(f'Player1 pairs: {player1_pairs}\n')
 print(f'Player2 pairs: {player2_pairs}\n')
