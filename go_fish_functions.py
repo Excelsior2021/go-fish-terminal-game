@@ -4,53 +4,49 @@ from deck_functions import *
 from random import choice
 
 
-def pairs(deck):
+def pairs(hand):
     '''Returns a list of pairs of values.'''
     pairs = []
-    for cardx in deck:
-        for cardy in deck:
+    for cardx in hand:
+        for cardy in hand:
             if get_value(cardx) == get_value(cardy) and get_suit(cardx) != get_suit(cardy) and cardx not in pairs and cardy not in pairs:
                 pairs.append(cardx)
                 pairs.append(cardy)
     for card in pairs:
-        deck.remove(card)
+        hand.remove(card)
     return pairs
 
-def ask_value(asker_cards, askee_cards, pairs):
+def ask_value(asker_hand, askee_hand, asker_pairs):
     '''Player asks for a value of a card they have in their hand.'''
-    if len(asker_cards) > 0:
-        card = choice(asker_cards)
+    if len(asker_hand) > 0 and len(askee_hand) > 0:
+        card = choice(asker_hand)
         value = get_value(card)
-        for card_1 in askee_cards:
+        for card_1 in askee_hand:
             if value == get_value(card_1):
-                pairs.append(card)
-                pairs.append(card_1)
-                asker_cards.remove(card)
-                askee_cards.remove(card_1)
-                ask_value(asker_cards, askee_cards, pairs)
-            continue 
+                asker_pairs.append(card)
+                asker_pairs.append(card_1)
+                asker_hand.remove(card)
+                askee_hand.remove(card_1)
+                break  
 
-def deal_card(asker_cards, askee_cards, pairs, deck):
+def deal_card(asker_hand, asker_pairs, deck):
     '''Deals top card from the deck and compares value with player ask or with another value in player hand. 
         If no matches, card added to player hand.'''
-    if len(deck) > 0:
+    if len(deck) > 0 and len(asker_hand) > 0:
         card = deal_top_card(deck)
         value = get_value(card)
-        if len(asker_cards) > 0:
-            player_ask = choice(asker_cards)
-            if value == get_value(player_ask):
-                pairs.append(card)
-                pairs.append(player_ask)
-                asker_cards.remove(player_ask)
-                ask_value(asker_cards, askee_cards, pairs)
-            elif value != get_value(player_ask):
-                for card_1 in asker_cards:
-                    if value == get_value(card_1):
-                        pairs.append(card)
-                        pairs.append(card_1)
-                        asker_cards.remove(card_1)
-                        break
-                    else:
-                        continue
-            else:
-                asker_cards.append(card)
+        player_ask = choice(asker_hand)
+        if value == get_value(player_ask):
+            asker_pairs.append(card)
+            asker_pairs.append(player_ask)
+            asker_hand.remove(player_ask)
+        elif value != get_value(player_ask):
+            for card_1 in asker_hand:
+                if value == get_value(card_1):
+                    asker_pairs.append(card)
+                    asker_pairs.append(card_1)
+                    asker_hand.remove(card_1)
+                    break
+                else:
+                    asker_hand.append(card)
+                    break
