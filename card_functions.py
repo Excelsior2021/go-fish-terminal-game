@@ -3,22 +3,6 @@
 non_num_cards = ['ace', 'jack', 'queen', 'king']
 suits = ['clubs', 'diamonds', 'hearts', 'spades']
 
-def create_deck():
-    '''Creates a full deck of cards.'''
-    deck = []
-    i = 0
-    for x in range(2, 11):
-        for y in suits:
-            deck.append(f'{x} of {y.title()}')
-    for x in non_num_cards:
-        if x != 'ace':
-            for y in suits:
-                deck.append(f'{x.title()} of {y.title()}')
-    for x in suits:
-        deck.insert(i, f'{non_num_cards[0].title()} of {x.title()}')
-        i= i+1
-    return deck
-
 def choose_suit(deck, suit=None):
     '''Returns a list of cards specified by suit.
     if no suit is provided, the full deck is returned.'''

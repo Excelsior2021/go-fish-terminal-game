@@ -12,22 +12,25 @@ print(f'Player1 original hand: {player1_cards}\n')
 print(f'Player2 original hand: {player2_cards}\n')
 
 #Inital pairs before players start.
-player1_pairs = pairs(player1_cards)
-player2_pairs = pairs(player2_cards)
+player1_pairs = initial_pairs(player1_cards)
+player2_pairs = initial_pairs(player2_cards)
 
 #Loop of game. Players taking turns based on rules.
-while len(deck) > 0 and len(player1_cards) > 0 and len(player2_cards) > 0:
-
+while len(deck) > 0 and len(player1_cards) > 0 or len(player2_cards) > 0:
     #player1 turn.
     player1_ask = ask_value(player1_cards, player2_cards, player1_pairs)
+    pairs(player1_cards, player1_pairs)
     again(player1_cards, player2_cards, player1_pairs)
     player1_dealed = deal_card(player1_cards, player2_cards, player1_pairs, deck)
+    pairs(player1_cards, player1_pairs)
     again(player1_cards, player2_cards, player1_pairs)
 
     #player2 turn.
     player2_ask = ask_value(player2_cards, player1_cards, player2_pairs)
+    pairs(player2_cards, player2_pairs)
     again(player2_cards, player1_cards, player2_pairs)
     player2_dealed = deal_card(player2_cards, player1_cards, player2_pairs, deck)
+    pairs(player2_cards, player2_pairs)
     again(player2_cards, player1_cards, player2_pairs)
 
 #Players pairs.
@@ -48,3 +51,5 @@ elif len(player2_pairs) > len(player1_pairs):
     print(f'Player2, you win! Well done!')
 else:
     print(f"It's a draw!")
+
+print(f'Total Card Count: {len(player1_cards + player2_cards + player1_pairs + player2_pairs + deck)}')
