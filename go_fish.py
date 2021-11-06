@@ -3,7 +3,7 @@ from go_fish_functions import *
 
 #Deck is created and shuffled. Hands are dealt to players.
 deck = create_deck()
-deck = shuffle_deck(deck)
+shuffle_deck(deck)
 player1_cards = deal_hand(deck, 7)
 player2_cards = deal_hand(deck, 7)
 
@@ -18,20 +18,10 @@ player2_pairs = initial_pairs(player2_cards)
 #Loop of game. Players taking turns based on rules.
 while len(deck) > 0 and len(player1_cards) > 0 or len(player2_cards) > 0:
     #player1 turn.
-    player1_ask = ask_value(player1_cards, player2_cards, player1_pairs)
-    pairs(player1_cards, player1_pairs)
-    again(player1_cards, player2_cards, player1_pairs)
-    player1_dealed = deal_card(player1_cards, player2_cards, player1_pairs, deck)
-    pairs(player1_cards, player1_pairs)
-    again(player1_cards, player2_cards, player1_pairs)
+    player1_turn = turn(player1_cards, player2_cards, player1_pairs, deck)
 
     #player2 turn.
-    player2_ask = ask_value(player2_cards, player1_cards, player2_pairs)
-    pairs(player2_cards, player2_pairs)
-    again(player2_cards, player1_cards, player2_pairs)
-    player2_dealed = deal_card(player2_cards, player1_cards, player2_pairs, deck)
-    pairs(player2_cards, player2_pairs)
-    again(player2_cards, player1_cards, player2_pairs)
+    player2_turn = turn(player2_cards, player1_cards, player2_pairs, deck)
 
 #Players pairs.
 print(f'Player1 pairs: {player1_pairs}\n')
@@ -46,9 +36,9 @@ print(f'Deck remaining: {len(deck)}\n')
 
 #Outcome of the game.
 if len(player1_pairs) > len(player2_pairs):
-    print(f'Player1, you win! Well done!')
+    print(f'Player1 wins!')
 elif len(player2_pairs) > len(player1_pairs):
-    print(f'Player2, you win! Well done!')
+    print(f'Player2 wins!')
 else:
     print(f"It's a draw!")
 
