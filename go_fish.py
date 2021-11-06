@@ -4,42 +4,42 @@ from go_fish_functions import *
 #Deck is created and shuffled. Hands are dealt to players.
 deck = create_deck()
 shuffle_deck(deck)
-player1_cards = deal_hand(deck, 7)
-player2_cards = deal_hand(deck, 7)
+player1_hand = deal_hand(deck, 7)
+comp_hand = deal_hand(deck, 7)
 
 #Original cards dealt to players.
-print(f'Player1 original hand: {player1_cards}\n')
-print(f'Player2 original hand: {player2_cards}\n')
+print(f'Player1 original hand: {player1_hand}\n')
+print(f'Computer original hand: {comp_hand}\n')
 
 #Inital pairs before players start.
-player1_pairs = initial_pairs(player1_cards)
-player2_pairs = initial_pairs(player2_cards)
+player1_pairs = initial_pairs(player1_hand)
+comp_pairs = initial_pairs(comp_hand)
 
 #Loop of game. Players taking turns based on rules.
-while len(deck) > 0 and len(player1_cards) > 0 or len(player2_cards) > 0:
+while len(deck) > 0 and len(player1_hand) > 0 or len(comp_hand) > 0:
     #player1 turn.
-    player1_turn = turn(player1_cards, player2_cards, player1_pairs, deck)
+    player1_turn = turn(player1_hand, comp_hand, player1_pairs, deck)
 
-    #player2 turn.
-    player2_turn = turn(player2_cards, player1_cards, player2_pairs, deck)
+    #comp turn.
+    comp_turn = turn(comp_hand, player1_hand, comp_pairs, deck)
 
 #Players pairs.
 print(f'Player1 pairs: {player1_pairs}\n')
-print(f'Player2 pairs: {player2_pairs}\n')
+print(f'Computer pairs: {comp_pairs}\n')
 
 #Player cards at the end of the game.
-print(f'Player1 cards left: {player1_cards}\n')
-print(f'Player2 cards left: {player2_cards}\n')
+print(f'Player1 cards left: {player1_hand}\n')
+print(f'Computer cards left: {comp_hand}\n')
 
 #Cards remaining in deck.
 print(f'Deck remaining: {len(deck)}\n')
 
 #Outcome of the game.
-if len(player1_pairs) > len(player2_pairs):
+if len(player1_pairs) > len(comp_pairs):
     print(f'Player1 wins!')
-elif len(player2_pairs) > len(player1_pairs):
-    print(f'Player2 wins!')
+elif len(comp_pairs) > len(player1_pairs):
+    print(f'Computer wins!')
 else:
     print(f"It's a draw!")
 
-print(f'Total Card Count: {len(player1_cards + player2_cards + player1_pairs + player2_pairs + deck)}')
+print(f'Total Card Count: {len(player1_hand + comp_hand + player1_pairs + comp_pairs + deck)}')
