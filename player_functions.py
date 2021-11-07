@@ -27,7 +27,6 @@ def match(player_hand, comp_hand, player_pairs, comp_pairs):
 def player_deal_card(pick, player_hand, comp_hand, player_pairs, comp_pairs, deck):
     '''Deals top card from the deck and compares value with player ask or with another value in player hand. 
         If no matches, card added to player hand.'''
-    matches = []
     if len(deck) > 0:
         print("Pick:" + pick)
         print("\nGo Fish! Deal a card from the deck.\n")
@@ -43,22 +42,14 @@ def player_deal_card(pick, player_hand, comp_hand, player_pairs, comp_pairs, dec
             elif value != get_value(pick):
                 for card_1 in player_hand:
                     if value == get_value(card_1):
-                        matches.append(card_1)
-                if len(matches) > 1:
-                    print(f'Matches: {matches}')
-                    card_2 = input("Choose the card you want to pair with the dealt card: ")
-                    player_pairs.append(card)
-                    player_pairs.append(card_2)
-                    player_hand.remove(card_2)
-                elif len(matches) == 1:
-                    print("You had one match, the two cards will be added to your pairs.\n")
-                    for card_3 in matches:
                         player_pairs.append(card)
-                        player_pairs.append(card_3)
-                        player_hand.remove(card_3)
-                else:
-                    print("No matches, the dealt card has been added to your hand.\n")
+                        player_pairs.append(card_1)
+                        player_hand.remove(card_1)
+                        print("The value you chose didn't match the dealt card but you had one other match in your hand, the two cards will be added to your pairs.\n")
+                        break
+                if card not in player_pairs:
                     player_hand.append(card)
+                    print("No matches, the dealt card has been added to your hand.\n")
     report_hands_pairs(player_hand, comp_hand, player_pairs, comp_pairs)
 
 def report_hands_pairs(player_hand, comp_hand, player_pairs, comp_pairs):
