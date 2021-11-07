@@ -18,10 +18,17 @@ comp_pairs = initial_pairs(comp_hand)
 
 report_hands_pairs(player_hand, comp_hand, player_pairs, comp_pairs)
 
-while len(deck) > 0:
-    pick = choose_card(player_hand)
-    match(pick, player_hand, comp_hand, player_pairs, comp_pairs)
-    player_deal_card(pick, player_hand, comp_hand, player_pairs, comp_pairs, deck)
+# while len(deck) > 0:
+pick = match(player_hand, comp_hand, player_pairs, comp_pairs)
+player_deal_card(pick, player_hand, comp_hand, player_pairs, comp_pairs, deck)
+
+
+
+
+
+
+
+
 
 
 

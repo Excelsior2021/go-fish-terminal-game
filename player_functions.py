@@ -10,7 +10,7 @@ def choose_card(player_hand):
         print("You don't have that card in your deck. Try again.")
         choose_card(player_hand)
 
-def match(pick, player_hand, comp_hand, player_pairs, comp_pairs):
+def match(player_hand, comp_hand, player_pairs, comp_pairs):
     pick = choose_card(player_hand)
     for card in comp_hand:
         if get_value(card) == get_value(pick):
@@ -20,8 +20,8 @@ def match(pick, player_hand, comp_hand, player_pairs, comp_pairs):
             comp_hand.remove(card)
             print("\nYou've matched! It's your turn again!\n")
             report_hands_pairs(player_hand, comp_hand, player_pairs, comp_pairs)
-            pick = choose_card(player_hand)
-            match(pick, player_hand, comp_hand, player_pairs, comp_pairs)
+            pick = match(player_hand, comp_hand, player_pairs, comp_pairs)
+    return pick
     
         
 def player_deal_card(pick, player_hand, comp_hand, player_pairs, comp_pairs, deck):
@@ -29,8 +29,8 @@ def player_deal_card(pick, player_hand, comp_hand, player_pairs, comp_pairs, dec
         If no matches, card added to player hand.'''
     matches = []
     if len(deck) > 0:
+        print("Pick:" + pick)
         print("\nGo Fish! Deal a card from the deck.\n")
-        print("pick:" + pick)
         card = deal_top_card(deck)
         value = get_value(card)
         print(f"Dealt card: {card}")
@@ -39,7 +39,7 @@ def player_deal_card(pick, player_hand, comp_hand, player_pairs, comp_pairs, dec
                 player_pairs.append(card)
                 player_pairs.append(pick)
                 player_hand.remove(pick)
-                print("The value you chose matches the card you dealt from the deck! Both cards will be added to your pairs.")
+                print("The value you chose matches the card you dealt from the deck! Both cards will be added to your pairs.\n")
             elif value != get_value(pick):
                 for card_1 in player_hand:
                     if value == get_value(card_1):
@@ -51,13 +51,13 @@ def player_deal_card(pick, player_hand, comp_hand, player_pairs, comp_pairs, dec
                     player_pairs.append(card_2)
                     player_hand.remove(card_2)
                 elif len(matches) == 1:
-                    print("You had one match, the two cards will be added to your pairs.")
+                    print("You had one match, the two cards will be added to your pairs.\n")
                     for card_3 in matches:
                         player_pairs.append(card)
                         player_pairs.append(card_3)
                         player_hand.remove(card_3)
                 else:
-                    print("No matches, the dealt card has been added to your hand.")
+                    print("No matches, the dealt card has been added to your hand.\n")
                     player_hand.append(card)
     report_hands_pairs(player_hand, comp_hand, player_pairs, comp_pairs)
 
