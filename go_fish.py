@@ -10,8 +10,7 @@ player_hand = deal_hand(deck, 7)
 comp_hand = deal_hand(deck, 7)
 
 #Original cards dealt to players.
-# print(f'Player original hand: {player_hand}\n')
-# print(f'Computer original hand: {comp_hand}\n')
+print(f'Player original hand: {player_hand}\n')
 
 #Inital pairs before players start.
 player_pairs = initial_pairs(player_hand)
@@ -19,14 +18,12 @@ comp_pairs = initial_pairs(comp_hand)
 
 report_hands_pairs(player_hand, comp_hand, player_pairs, comp_pairs)
 
-while len(deck) > 0:
+while len(deck) > 0 and len(player_hand) > 0 or len(comp_hand) > 0:
     #player turn
-    player_pick = player_match(player_hand, comp_hand, player_pairs, comp_pairs)
-    player_deal_card(player_pick, player_hand, comp_hand, player_pairs, comp_pairs, deck)
+    player_pick = player_match(player_hand, comp_hand, player_pairs, comp_pairs, deck)
 
     #computer turn
     comp_pick = computer_match(player_hand, comp_hand, player_pairs, comp_pairs, deck)
-    computer_deal_card(comp_pick, player_hand, comp_hand, player_pairs, comp_pairs, deck)
 
 
 

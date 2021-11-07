@@ -25,10 +25,10 @@ def pairs(hand, pairs):
             hand.remove(card)
 
 def report_hands_pairs(player_hand, comp_hand, player_pairs, comp_pairs):
-    print(f"Player pairs: {player_pairs}")
+    print(f"Player pairs: {player_pairs}\n")
     print(f"Computer pairs: {comp_pairs}\n")
     print(f"Player hand: {player_hand}")
-    print(f"Computer hand: {comp_hand}")
+    # print(f"Computer hand: {comp_hand}")
 
 def ask_value(asker_hand, askee_hand, asker_pairs):
     '''Player asks for a value of a card they have in their hand.'''
