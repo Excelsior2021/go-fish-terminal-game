@@ -1,6 +1,7 @@
 '''A simulation of an adaptation of the card game Go Fish.'''
 from go_fish_functions import *
 from player_functions import *
+from computer_functions import *
 
 #Deck is created and shuffled. Hands are dealt to players.
 deck = create_deck()
@@ -18,28 +19,16 @@ comp_pairs = initial_pairs(comp_hand)
 
 report_hands_pairs(player_hand, comp_hand, player_pairs, comp_pairs)
 
-# while len(deck) > 0:
-pick = match(player_hand, comp_hand, player_pairs, comp_pairs)
-player_deal_card(pick, player_hand, comp_hand, player_pairs, comp_pairs, deck)
+while len(deck) > 0:
+    #player turn
+    player_pick = player_match(player_hand, comp_hand, player_pairs, comp_pairs)
+    player_deal_card(player_pick, player_hand, comp_hand, player_pairs, comp_pairs, deck)
+
+    #computer turn
+    comp_pick = computer_match(player_hand, comp_hand, player_pairs, comp_pairs, deck)
+    computer_deal_card(comp_pick, player_hand, comp_hand, player_pairs, comp_pairs, deck)
 
 
-
-
-
-
-
-
-# #Loop of game. Players taking turns based on rules.
-# while len(deck) > 0 and len(player1_hand) > 0 or len(comp_hand) > 0:
-#     #player1 turn.
-#     player1_turn = turn(player1_hand, comp_hand, player1_pairs, deck)
-
-#     #comp turn.
-#     comp_turn = turn(comp_hand, player1_hand, comp_pairs, deck)
-
-# #Players pairs.
-# print(f'Player1 pairs: {player1_pairs}\n')
-# print(f'Computer pairs: {comp_pairs}\n')
 
 # #Player cards at the end of the game.
 # print(f'Player1 cards left: {player1_hand}\n')

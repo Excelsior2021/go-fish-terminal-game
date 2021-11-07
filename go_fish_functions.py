@@ -1,8 +1,6 @@
 from card_functions import *
 from deck_functions import *
 
-from random import choice
-
 def initial_pairs(hand):
     '''Returns a list of pairs of values.'''
     pairs = []
@@ -25,6 +23,12 @@ def pairs(hand, pairs):
     for card in pairs:
         if card in hand:
             hand.remove(card)
+
+def report_hands_pairs(player_hand, comp_hand, player_pairs, comp_pairs):
+    print(f"Player pairs: {player_pairs}")
+    print(f"Computer pairs: {comp_pairs}\n")
+    print(f"Player hand: {player_hand}")
+    print(f"Computer hand: {comp_hand}")
 
 def ask_value(asker_hand, askee_hand, asker_pairs):
     '''Player asks for a value of a card they have in their hand.'''
