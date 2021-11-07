@@ -29,9 +29,6 @@ player_deal_card(pick, player_hand, comp_hand, player_pairs, comp_pairs, deck)
 
 
 
-
-
-
 # #Loop of game. Players taking turns based on rules.
 # while len(deck) > 0 and len(player1_hand) > 0 or len(comp_hand) > 0:
 #     #player1 turn.

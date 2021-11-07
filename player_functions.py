@@ -38,14 +38,16 @@ def player_deal_card(pick, player_hand, comp_hand, player_pairs, comp_pairs, dec
                 player_pairs.append(card)
                 player_pairs.append(pick)
                 player_hand.remove(pick)
-                print("The value you chose matches the card you dealt from the deck! Both cards will be added to your pairs.\n")
+                print("The value you chose matches the card you dealt from the deck! Both cards will be added to your pairs. It's your turn again!\n")
+                report_hands_pairs(player_hand, comp_hand, player_pairs, comp_pairs)
+                match(player_hand, comp_hand, player_pairs, comp_pairs)
             elif value != get_value(pick):
                 for card_1 in player_hand:
                     if value == get_value(card_1):
                         player_pairs.append(card)
                         player_pairs.append(card_1)
                         player_hand.remove(card_1)
-                        print("The value you chose didn't match the dealt card but you had one other match in your hand, the two cards will be added to your pairs.\n")
+                        print("The value you chose didn't match the dealt card but you had a match in your hand, the two cards will be added to your pairs.\n")
                         break
                 if card not in player_pairs:
                     player_hand.append(card)
