@@ -25,56 +25,7 @@ def pairs(hand, pairs):
             hand.remove(card)
 
 def report_hands_pairs(player_hand, comp_hand, player_pairs, comp_pairs):
-    print(f"Player pairs: {player_pairs}\n")
+    print(f"\nPlayer pairs: {player_pairs}\n")
     print(f"Computer pairs: {comp_pairs}\n")
-    print(f"Player hand: {player_hand}")
-    # print(f"Computer hand: {comp_hand}")
-
-def ask_value(asker_hand, askee_hand, asker_pairs):
-    '''Player asks for a value of a card they have in their hand.'''
-    if len(asker_hand) > 0 and len(askee_hand) > 0:
-        card = choice(asker_hand)
-        value = get_value(card)
-        for card_1 in askee_hand:
-            if value == get_value(card_1):
-                asker_pairs.append(card)
-                asker_pairs.append(card_1)
-                asker_hand.remove(card)
-                askee_hand.remove(card_1)
-                return True
-
-def deal_card(asker_hand, asker_pairs, deck):
-    '''Deals top card from the deck and compares value with player ask or with another value in player hand. 
-        If no matches, card added to player hand.'''
-    if len(deck) > 0:
-        card = deal_top_card(deck)
-        value = get_value(card)
-        if len(asker_hand) > 0:
-            player_ask = choice(asker_hand)
-            if value == get_value(player_ask):
-                asker_pairs.append(card)
-                asker_pairs.append(player_ask)
-                asker_hand.remove(player_ask)
-                return True
-            elif value != get_value(player_ask):
-                for card_1 in asker_hand:
-                    if value == get_value(card_1):
-                        asker_pairs.append(card)
-                        asker_pairs.append(card_1)
-                        asker_hand.remove(card_1)
-                        break
-                    else:
-                        asker_hand.append(card)
-                        break
-        else:
-            asker_hand.append(card)
-
-def turn(asker_hand, askee_hand, asker_pairs, deck):
-    ask_value(asker_hand, askee_hand, asker_pairs)
-    pairs(asker_hand, asker_pairs)
-    if ask_value:
-        ask_value(asker_hand, askee_hand, asker_pairs)
-    deal_card(asker_hand, asker_pairs, deck)
-    pairs(asker_hand, asker_pairs)
-    if deal_card:
-        ask_value(asker_hand, askee_hand, asker_pairs)
+    print(f"Player hand: {player_hand}\n")
+    print(f"Computer hand: {comp_hand}")
