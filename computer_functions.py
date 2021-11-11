@@ -2,11 +2,22 @@ from card_functions import *
 from deck_functions import *
 from go_fish_functions import report_hands_pairs
 
-def computer_choose_card(comp_hand):
-    card = choice(comp_hand)
+def computer_choose_card(comp_hand, comp_asked):
+    copy = computer_asked(comp_hand, comp_asked)
+    card = choice(copy)
     return card
 
-def computer_request(pick, value, deck, player_hand, comp_hand, player_pairs, comp_pairs):
+def computer_asked(comp_hand, comp_asked):
+    comp_hand_copy = comp_hand[:]
+    if len(comp_hand) > 1:
+        for card in comp_hand_copy:
+            if card in comp_asked:
+                comp_hand_copy.remove(card)
+        return comp_hand_copy
+    else:
+        return comp_hand_copy
+
+def computer_request(pick, value, deck, player_hand, comp_hand, player_pairs, comp_pairs, comp_asked):
     check = False
     player_response = input(f"\nDo you have a {value}?(y/n): ")
     if player_response == 'y':
@@ -16,35 +27,41 @@ def computer_request(pick, value, deck, player_hand, comp_hand, player_pairs, co
                 comp_pairs.append(card)
                 comp_hand.remove(pick)
                 player_hand.remove(card)
-                print(f"\nYour opponent has taken your {card}. It's their turn again.")
-                report_hands_pairs(player_hand, comp_hand, player_pairs, comp_pairs)
-                computer_match(player_hand, comp_hand, player_pairs, comp_pairs, deck)
-                check = True
-                break
+                if len(comp_hand) == 0:
+                    check = True
+                    pass
+                else:
+                    print(f"\nYour opponent has taken your {card}. It's their turn again.")
+                    report_hands_pairs(player_hand, comp_hand, player_pairs, comp_pairs)
+                    computer_match(player_hand, comp_hand, player_pairs, comp_pairs, deck, comp_asked)
+                    check = True
+                    break
         if check == False:
             print("\nAre you sure?")
-            computer_request(pick, value, deck, player_hand, comp_hand, player_pairs, comp_pairs)
+            computer_request(pick, value, deck, player_hand, comp_hand, player_pairs, comp_pairs, comp_asked)
     elif player_response == 'n':
         for card in player_hand:
             if get_value(card) == value:
                 print("Are you sure?")
-                computer_request(pick, value, deck, player_hand, comp_hand, player_pairs, comp_pairs)
+                computer_request(pick, value, deck, player_hand, comp_hand, player_pairs, comp_pairs, comp_asked)
                 check == True
                 break
         if pick not in comp_pairs:
             print("\nYour opponent has to deal a card from the deck.")
-            computer_deal_card(pick, player_hand, comp_hand, player_pairs, comp_pairs, deck)
+            comp_asked.append(pick)
+            computer_deal_card(pick, player_hand, comp_hand, player_pairs, comp_pairs, deck, comp_asked)
+            return comp_asked
     else:
         print("That is not a valid response, please enter y/n.")
-        computer_request(pick, value, deck, player_hand, comp_hand, player_pairs, comp_pairs)
+        computer_request(pick, value, deck, player_hand, comp_hand, player_pairs, comp_pairs, comp_asked)
 
-def computer_match(player_hand, comp_hand, player_pairs, comp_pairs, deck):
+def computer_match(player_hand, comp_hand, player_pairs, comp_pairs, deck, comp_asked):
     if len(comp_hand) > 0 and len(player_hand) > 0:
-        pick = computer_choose_card(comp_hand)
+        pick = computer_choose_card(comp_hand, comp_asked)
         value = get_value(pick)
-        computer_request(pick, value, deck, player_hand, comp_hand, player_pairs, comp_pairs)
+        computer_request(pick, value, deck, player_hand, comp_hand, player_pairs, comp_pairs, comp_asked)
 
-def computer_deal_card(pick, player_hand, comp_hand, player_pairs, comp_pairs, deck):
+def computer_deal_card(pick, player_hand, comp_hand, player_pairs, comp_pairs, deck, comp_asked):
     if len(deck) > 0:
         card = deal_top_card(deck)
         value = get_value(card)
@@ -55,7 +72,7 @@ def computer_deal_card(pick, player_hand, comp_hand, player_pairs, comp_pairs, d
                 comp_hand.remove(pick)
                 print("Your opponent matched with the dealt card. Both cards have been added to their pairs. It's your opponent's turn again.")
                 report_hands_pairs(player_hand, comp_hand, player_pairs, comp_pairs)
-                computer_match(player_hand, comp_hand, player_pairs, comp_pairs, deck)
+                computer_match(player_hand, comp_hand, player_pairs, comp_pairs, deck, comp_asked)
             elif value != get_value(pick):
                 for card_1 in comp_hand:
                     if value == get_value(card_1):

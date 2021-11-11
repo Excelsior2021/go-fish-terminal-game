@@ -18,26 +18,35 @@ comp_pairs = initial_pairs(comp_hand)
 
 report_hands_pairs(player_hand, comp_hand, player_pairs, comp_pairs)
 
+comp_asked = []
+comp_hand_copy = comp_hand[:]
+
 while len(deck) > 0 and len(player_hand) > 0 and len(comp_hand) > 0:
     #player turn
-    player_pick = player_match(player_hand, comp_hand, player_pairs, comp_pairs, deck)
+    player_pick = player_match(player_hand, comp_hand, player_pairs, comp_pairs, deck, comp_asked)
 
     #computer turn
-    comp_pick = computer_match(player_hand, comp_hand, player_pairs, comp_pairs, deck)
+    comp_pick = computer_match(player_hand, comp_hand, player_pairs, comp_pairs, deck, comp_asked)
+
+"""End of Game"""
+print("\n________________________________________________________________")
+print("\nGAME OVER!")
+
+#Outcome of the game.
+if len(player_pairs) > len(comp_pairs):
+    print(f'\nYou win!'.upper())
+elif len(comp_pairs) > len(player_pairs):
+    print(f'\nYour opponent wins!'.upper())
+else:
+    print(f"\nIt's a draw!".upper())
 
 #Player cards at the end of the game.
-print(f'Player1 cards left: {player_hand}\n')
+print(f"\nPlayer pairs: {player_pairs}\n")
+print(f"Computer pairs: {comp_pairs}\n")
+print(f'\nPlayer1 cards left: {player_hand}\n')
 print(f'Computer cards left: {comp_hand}\n')
 
 #Cards remaining in deck.
 print(f'Deck remaining: {len(deck)}\n')
-
-#Outcome of the game.
-if len(player_pairs) > len(comp_pairs):
-    print(f'You win!')
-elif len(comp_pairs) > len(player_pairs):
-    print(f'Your opponent wins!')
-else:
-    print(f"It's a draw!")
 
 print(f'Total Card Count: {len(player_hand + comp_hand + player_pairs + comp_pairs + deck)}')

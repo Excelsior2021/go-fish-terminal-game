@@ -28,4 +28,4 @@ def report_hands_pairs(player_hand, comp_hand, player_pairs, comp_pairs):
     print(f"\nPlayer pairs: {player_pairs}\n")
     print(f"Computer pairs: {comp_pairs}\n")
     print(f"Player hand: {player_hand}\n")
-    print(f"Computer hand: {comp_hand}")
+    # print(f"Computer hand: {comp_hand}")
