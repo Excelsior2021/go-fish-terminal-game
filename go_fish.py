@@ -49,4 +49,4 @@ print(f'Computer cards left: {comp_hand}\n')
 #Cards remaining in deck.
 print(f'Deck remaining: {len(deck)}\n')
 
-print(f'Total Card Count: {len(player_hand + comp_hand + player_pairs + comp_pairs + deck)}')
+# print(f'Total Card Count: {len(player_hand + comp_hand + player_pairs + comp_pairs + deck)}')
