@@ -25,6 +25,7 @@ def pairs(hand, pairs):
             hand.remove(card)
 
 def report_hands_pairs(player_hand, comp_hand, player_pairs, comp_pairs):
+    '''Prints out lists of players cards in their current status.'''
     print(f"\nPlayer pairs: {player_pairs}\n")
     print(f"Computer pairs: {comp_pairs}\n")
     print(f"Player hand: {player_hand}\n")

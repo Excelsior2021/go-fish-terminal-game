@@ -11,6 +11,7 @@ def player_choose_card(player_hand):
         print("You don't have that card in your deck. Try again.")
 
 def player_match(player_hand, comp_hand, player_pairs, comp_pairs, deck, comp_asked):
+    '''Checks to see if player matches with a value requested from the opponent's hand. If no match. Player deals from the deck.'''
     if len(player_hand) > 0 and len(comp_hand) > 0:
         pick = player_choose_card(player_hand)
         while not pick:
@@ -33,7 +34,7 @@ def player_match(player_hand, comp_hand, player_pairs, comp_pairs, deck, comp_as
         return pick
       
 def player_deal_card(pick, player_hand, comp_hand, player_pairs, comp_pairs, deck, comp_asked):
-    '''Deals top card from the deck and compares value with player ask or with another value in player hand. 
+    '''Deals top card from the deck and compares value with value player chose initially or with another value in player hand. 
         If no matches, card added to player hand.'''
     comp_asked = comp_asked
     if len(deck) > 0:

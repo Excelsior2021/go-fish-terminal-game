@@ -3,11 +3,13 @@ from deck_functions import *
 from go_fish_functions import report_hands_pairs
 
 def computer_choose_card(comp_hand, comp_asked):
+    '''Computer chooses card from hand.'''
     copy = computer_asked(comp_hand, comp_asked)
     card = choice(copy)
     return card
 
 def computer_asked(comp_hand, comp_asked):
+    '''Checks if computer has asked player for value already if player has not added card from deck.'''
     comp_hand_copy = comp_hand[:]
     if len(comp_hand) > 1:
         for card in comp_hand_copy:
@@ -18,6 +20,8 @@ def computer_asked(comp_hand, comp_asked):
         return comp_hand_copy
 
 def computer_request(pick, value, deck, player_hand, comp_hand, player_pairs, comp_pairs, comp_asked):
+    '''Computer asks if player has value. Function verifies players response. 
+    If response if valid, if 'yes', computer matches with card from player hand. If 'no' computer deals from deck.'''
     check = False
     player_response = input(f"\nDo you have a {value}?(y/n): ")
     if player_response == 'y':
@@ -56,12 +60,15 @@ def computer_request(pick, value, deck, player_hand, comp_hand, player_pairs, co
         computer_request(pick, value, deck, player_hand, comp_hand, player_pairs, comp_pairs, comp_asked)
 
 def computer_match(player_hand, comp_hand, player_pairs, comp_pairs, deck, comp_asked):
+    '''Computer chooses card from hand and calls function to query player.'''
     if len(comp_hand) > 0 and len(player_hand) > 0:
         pick = computer_choose_card(comp_hand, comp_asked)
         value = get_value(pick)
         computer_request(pick, value, deck, player_hand, comp_hand, player_pairs, comp_pairs, comp_asked)
 
 def computer_deal_card(pick, player_hand, comp_hand, player_pairs, comp_pairs, deck, comp_asked):
+    '''Deals top card from the deck and compares value with value that computer chose initially or with another value in computer's hand. 
+    If no matches, card added to computer's hand.'''
     if len(deck) > 0:
         card = deal_top_card(deck)
         value = get_value(card)
