@@ -86,7 +86,7 @@ def computer_deal_card(pick, player_hand, comp_hand, player_pairs, comp_pairs, d
                         comp_pairs.append(card)
                         comp_pairs.append(card_1)
                         comp_hand.remove(card_1)
-                        print("Your opponent didn't match the orginal choice with the dealt card, but another card in their deck matched. Both cards will be added to their pairs. It's your turn.")
+                        print("Your opponent didn't match their orginal choice with the dealt card, but another card in their deck matched. Both cards will be added to their pairs. It's your turn.")
                         report_hands_pairs(player_hand, comp_hand, player_pairs, comp_pairs)
                         break
                 if card not in comp_pairs:

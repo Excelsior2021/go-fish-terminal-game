@@ -9,11 +9,14 @@ import json
 first_record = {"Wins": 0, "Loses": 0, "Draws": 0}
 
 #Print current stats
-filename = 'record.json'
-with open(filename) as f:
-    current_record = json.load(f)
-
-print(f"Current Record: {current_record}\n")
+try:
+    filename = 'record.json'
+    with open(filename) as f:
+        current_record = json.load(f)
+except FileNotFoundError:
+    pass
+else:
+    print(f"Current Record: {current_record}\n")
 
 #Deck is created and shuffled. Hands are dealt to players.
 deck = create_deck()
@@ -33,7 +36,7 @@ report_hands_pairs(player_hand, comp_hand, player_pairs, comp_pairs)
 comp_asked = []
 comp_hand_copy = comp_hand[:]
 
-while len(deck) > 0 and len(player_hand) > 0 and len(comp_hand) > 0 and len(player_pairs) > 8:
+while len(deck) > 0 and len(player_hand) > 0 and len(comp_hand) > 0:
     #player turn
     player_pick = player_match(player_hand, comp_hand, player_pairs, comp_pairs, deck, comp_asked)
 
