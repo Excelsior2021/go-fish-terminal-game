@@ -5,7 +5,7 @@ from computer_functions import *
 from stats import record
 import json
 
-#Initialise record file. To be used if no record file exists already. I will be updated after game is played.
+#Initialise record file. To be used if no record file exists already. It will be updated after a game is played.
 first_record = {"Wins": 0, "Loses": 0, "Draws": 0}
 
 #Print current stats
@@ -34,7 +34,6 @@ comp_pairs = initial_pairs(comp_hand)
 report_hands_pairs(player_hand, comp_hand, player_pairs, comp_pairs)
 
 comp_asked = []
-comp_hand_copy = comp_hand[:]
 
 while len(deck) > 0 and len(player_hand) > 0 and len(comp_hand) > 0:
     #player turn
