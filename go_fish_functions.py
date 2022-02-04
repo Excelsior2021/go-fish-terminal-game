@@ -2,7 +2,7 @@ from card_functions import *
 from deck_functions import *
 
 def initial_pairs(hand):
-    '''Returns a list of pairs of values.'''
+    '''Returns a list of initial pairs of values.'''
     pairs = []
     for cardx in hand:
         for cardy in hand:
