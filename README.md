@@ -9,5 +9,3 @@ Choose a card from your hand:
 5 of Hearts
 
 A player record is also provided and updated after each game. Unit testing has also been performed for this project.
-
-There are also fully simulated versions of this project in my repositories.
